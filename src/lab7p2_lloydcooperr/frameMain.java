@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
@@ -65,6 +66,11 @@ public class frameMain extends javax.swing.JFrame {
         ycAño = new com.toedter.calendar.JYearChooser();
         btnColor = new javax.swing.JButton();
         btnCrearVehiculo = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        cbVendedor = new javax.swing.JComboBox<>();
+        cbCliente = new javax.swing.JComboBox<>();
+        cbVehiculo = new javax.swing.JComboBox<>();
+        btnHacerVenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -231,7 +237,6 @@ public class frameMain extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Precio");
 
-        btnColor.setText("Elija color");
         btnColor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnColorMouseClicked(evt);
@@ -280,28 +285,63 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel10)
-                    .addComponent(btnColor))
+                    .addComponent(btnColor, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(tfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(tfPrecioVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(ycAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear vehiculo", jPanel3);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnHacerVenta.setText("Hacer venta");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnHacerVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(cbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(cbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnHacerVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Venta", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,6 +374,7 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Debe llenar todos los campos");
         } else {
             vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
+            cbVendedor.setModel(updateComboBoxVendedores());
             JOptionPane.showMessageDialog(this,"Vendedor creado correctamente");
             generarJsonFileVendedor(vendedores);
         }
@@ -364,6 +405,7 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         } else {
             clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
+            cbCliente.setModel(updateComboBoxClientes());
             JOptionPane.showMessageDialog(this, "Cliente creado correctamente");
             generarJsonFileClientes(clientes);
         }
@@ -395,6 +437,7 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         } else {
             vehiculos.add(new Vehiculo(marcaVehiculo, colorVehiculo, modeloVehiculo, año, precioVenta));
+            cbVehiculo.setModel(updateComboBoxVehiculos());
             JOptionPane.showMessageDialog(this,"Vehiculo creado correctamente");
             generarJsonFileVehiculos(vehiculos);
         }
@@ -498,6 +541,30 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    public DefaultComboBoxModel updateComboBoxVendedores(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Vendedor vendedor : vendedores) {
+            modelo.addElement(vendedor);
+        }
+        return modelo;
+    }
+    
+    public DefaultComboBoxModel updateComboBoxClientes(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Cliente cliente : clientes) {
+            modelo.addElement(cliente);
+        }
+        return modelo;
+    }
+    
+    public DefaultComboBoxModel updateComboBoxVehiculos(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        for (Vehiculo vehiculo : vehiculos) {
+            modelo.addElement(vehiculo);
+        }
+        return modelo;
+    }
     /**
      * @param args the command line arguments
      */
@@ -538,6 +605,10 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearVehiculo;
     private javax.swing.JButton btnCrearVendedor;
+    private javax.swing.JButton btnHacerVenta;
+    private javax.swing.JComboBox<String> cbCliente;
+    private javax.swing.JComboBox<String> cbVehiculo;
+    private javax.swing.JComboBox<String> cbVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -554,6 +625,7 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField tfCantCarrosComprados;
     private javax.swing.JTextField tfCantCarrosVendidos;
