@@ -4,12 +4,12 @@ import java.awt.Color;
 
 public class Vehiculo {
     private String marcaVehiculo;
-    private Color colorVehiculo;
+    private String colorVehiculo;
     private String modelo;
     private String año;
     private int precioVenta;
 
-    public Vehiculo(String marcaVehiculo, Color colorVehiculo, String modelo, String año, int precioVenta) {
+    public Vehiculo(String marcaVehiculo, String colorVehiculo, String modelo, String año, int precioVenta) {
         this.marcaVehiculo = marcaVehiculo;
         this.colorVehiculo = colorVehiculo;
         this.modelo = modelo;
@@ -25,11 +25,11 @@ public class Vehiculo {
         this.marcaVehiculo = marcaVehiculo;
     }
 
-    public Color getColorVehiculo() {
+    public String getColorVehiculo() {
         return colorVehiculo;
     }
 
-    public void setColorVehiculo(Color colorVehiculo) {
+    public void setColorVehiculo(String colorVehiculo) {
         this.colorVehiculo = colorVehiculo;
     }
 
@@ -56,6 +56,8 @@ public class Vehiculo {
     public void setPrecioVenta(int precioVenta) {
         this.precioVenta = precioVenta;
     }
+
+    
 
     @Override
     public String toString() {

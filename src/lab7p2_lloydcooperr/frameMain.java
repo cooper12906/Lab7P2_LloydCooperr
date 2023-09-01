@@ -2,6 +2,7 @@ package lab7p2_lloydcooperr;
 
 import java.awt.Color;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class frameMain extends javax.swing.JFrame {
     private ArrayList <Vendedor> vendedores = new ArrayList();
     private ArrayList <Cliente> clientes = new ArrayList();
     private ArrayList <Vehiculo> vehiculos = new ArrayList();
+    private ArrayList <Venta> ventas = new ArrayList();
     
     public frameMain() {
         initComponents();
@@ -33,6 +35,12 @@ public class frameMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupModificarArchivo = new javax.swing.JPopupMenu();
+        menuItemModificar = new javax.swing.JMenuItem();
+        dialogModificarArchivo = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        taListarArchivo = new javax.swing.JScrollPane();
+        btnModificarArchivo = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -64,13 +72,64 @@ public class frameMain extends javax.swing.JFrame {
         tfModeloVehiculo = new javax.swing.JTextField();
         tfPrecioVehiculo = new javax.swing.JTextField();
         ycAño = new com.toedter.calendar.JYearChooser();
-        btnColor = new javax.swing.JButton();
         btnCrearVehiculo = new javax.swing.JButton();
+        tfColorVehiculo = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         cbVendedor = new javax.swing.JComboBox<>();
         cbCliente = new javax.swing.JComboBox<>();
         cbVehiculo = new javax.swing.JComboBox<>();
         btnHacerVenta = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        treeAdmin = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        treeDia = new javax.swing.JTree();
+        btnUpdateDiaTree = new javax.swing.JButton();
+        btnUpdateAdminTree = new javax.swing.JButton();
+
+        menuItemModificar.setText("Modificar archivo");
+        menuItemModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemModificarActionPerformed(evt);
+            }
+        });
+        popupModificarArchivo.add(menuItemModificar);
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnModificarArchivo.setText("Modificar archivo");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(taListarArchivo)
+                    .addComponent(btnModificarArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(taListarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnModificarArchivo)
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogModificarArchivoLayout = new javax.swing.GroupLayout(dialogModificarArchivo.getContentPane());
+        dialogModificarArchivo.getContentPane().setLayout(dialogModificarArchivoLayout);
+        dialogModificarArchivoLayout.setHorizontalGroup(
+            dialogModificarArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        dialogModificarArchivoLayout.setVerticalGroup(
+            dialogModificarArchivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,7 +191,7 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(tfCantDineroGenerado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear vendedor", jPanel1);
@@ -215,7 +274,7 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(tfSueldoDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear cliente", jPanel2);
@@ -236,12 +295,6 @@ public class frameMain extends javax.swing.JFrame {
 
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Precio");
-
-        btnColor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnColorMouseClicked(evt);
-            }
-        });
 
         btnCrearVehiculo.setText("Crear vehiculo");
         btnCrearVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -271,7 +324,7 @@ public class frameMain extends javax.swing.JFrame {
                             .addComponent(tfModeloVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                             .addComponent(tfPrecioVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                             .addComponent(ycAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(tfColorVehiculo)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(btnCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -285,10 +338,10 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(tfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(btnColor, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(tfColorVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(tfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -303,7 +356,7 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(ycAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear vehiculo", jPanel3);
@@ -311,6 +364,11 @@ public class frameMain extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         btnHacerVenta.setText("Hacer venta");
+        btnHacerVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnHacerVentaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -338,10 +396,65 @@ public class frameMain extends javax.swing.JFrame {
                     .addComponent(cbVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnHacerVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Venta", jPanel4);
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Admin");
+        treeAdmin.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(treeAdmin);
+
+        treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Dia");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Venta");
+        treeNode1.add(treeNode2);
+        treeDia.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        treeDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                treeDiaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(treeDia);
+
+        btnUpdateDiaTree.setText("Update day tree");
+
+        btnUpdateAdminTree.setText("Update admin tree");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnUpdateAdminTree, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                    .addComponent(btnUpdateDiaTree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUpdateDiaTree)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUpdateAdminTree))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Trees", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -421,7 +534,7 @@ public class frameMain extends javax.swing.JFrame {
 
     private void btnCrearVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearVehiculoMouseClicked
         String marcaVehiculo = tfMarcaVehiculo.getText();
-        Color colorVehiculo = btnColor.getBackground();
+        String colorVehiculo = tfColorVehiculo.getText();
         String modeloVehiculo = tfModeloVehiculo.getText();
         String año = String.valueOf(ycAño.getY());
         int precioVenta = 0;
@@ -443,14 +556,55 @@ public class frameMain extends javax.swing.JFrame {
         }
 
         tfMarcaVehiculo.setText("");
-        btnColor.setBackground(Color.white);
+        tfColorVehiculo.setText("");
         tfModeloVehiculo.setText("");
         tfPrecioVehiculo.setText("");
     }//GEN-LAST:event_btnCrearVehiculoMouseClicked
 
-    private void btnColorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMouseClicked
-        btnColor.setBackground(JColorChooser.showDialog(this, "Elige un color para el carro: ", Color.yellow));
-    }//GEN-LAST:event_btnColorMouseClicked
+    private void btnHacerVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHacerVentaMouseClicked
+        if (cbVendedor.getSelectedIndex() >= 0 || cbCliente.getSelectedIndex() >= 0 || cbVehiculo.getSelectedIndex() >= 0) {
+            Vendedor vendedor = vendedores.get(cbVendedor.getSelectedIndex());
+            Cliente cliente = clientes.get(cbCliente.getSelectedIndex());
+            Vehiculo vehiculo = vehiculos.get(cbVehiculo.getSelectedIndex());
+            String clients = cliente.getNombreCliente();
+            String sellers = vendedor.getNombreVendedor();
+            int costo = vehiculo.getPrecioVenta();
+            String marca = vehiculo.getMarcaVehiculo();
+            ventas.add(new Venta(sellers, clients, costo, marca));
+            JOptionPane.showMessageDialog(this, "Venta realizada correctamente");
+            File file = null;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            try {
+                file = new File("src/ventas.txt");
+                fw = new FileWriter(file,true);
+                bw = new BufferedWriter(fw);
+                
+                String jsonVentas = "[\n"
+                                    + "\t" + sellers + "\n"
+                                    + "\t" + clients + "\n"
+                                    + "\t" + costo + "\n"
+                                    + "\t" + marca + "\n";
+                
+                bw.write(jsonVentas);
+                bw.flush();
+                fw.close();
+                bw.close();
+            } catch (Exception e) {
+                
+            }
+        }
+    }//GEN-LAST:event_btnHacerVentaMouseClicked
+
+    private void treeDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeDiaMouseClicked
+        if (evt.isMetaDown()) {
+            popupModificarArchivo.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_treeDiaMouseClicked
+
+    private void menuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarActionPerformed
+        
+    }//GEN-LAST:event_menuItemModificarActionPerformed
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
@@ -524,6 +678,7 @@ public class frameMain extends javax.swing.JFrame {
             }
 
             archivoJson.append("\t").append(vehiculo.getMarcaVehiculo()).append(",\n");
+            archivoJson.append("\t").append(vehiculo.getColorVehiculo()).append("\n");
             archivoJson.append("\t").append(vehiculo.getModelo()).append(",\n");
             archivoJson.append("\t").append(vehiculo.getAño()).append("\n");
             archivoJson.append("\t").append(vehiculo.getPrecioVenta()).append("\n");
@@ -601,14 +756,17 @@ public class frameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnColor;
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearVehiculo;
     private javax.swing.JButton btnCrearVendedor;
     private javax.swing.JButton btnHacerVenta;
+    private javax.swing.JButton btnModificarArchivo;
+    private javax.swing.JButton btnUpdateAdminTree;
+    private javax.swing.JButton btnUpdateDiaTree;
     private javax.swing.JComboBox<String> cbCliente;
     private javax.swing.JComboBox<String> cbVehiculo;
     private javax.swing.JComboBox<String> cbVendedor;
+    private javax.swing.JDialog dialogModificarArchivo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -626,10 +784,18 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JMenuItem menuItemModificar;
+    private javax.swing.JPopupMenu popupModificarArchivo;
+    private javax.swing.JScrollPane taListarArchivo;
     private javax.swing.JTextField tfCantCarrosComprados;
     private javax.swing.JTextField tfCantCarrosVendidos;
     private javax.swing.JTextField tfCantDineroGenerado;
+    private javax.swing.JTextField tfColorVehiculo;
     private javax.swing.JTextField tfEdadCliente;
     private javax.swing.JTextField tfMarcaVehiculo;
     private javax.swing.JTextField tfModeloVehiculo;
@@ -638,6 +804,8 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JTextField tfPrecioVehiculo;
     private javax.swing.JTextField tfProfesionCliente;
     private javax.swing.JTextField tfSueldoDisponible;
+    private javax.swing.JTree treeAdmin;
+    private javax.swing.JTree treeDia;
     private com.toedter.calendar.JYearChooser ycAño;
     // End of variables declaration//GEN-END:variables
 }
