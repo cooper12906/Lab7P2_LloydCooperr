@@ -329,12 +329,14 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
             return; 
         }
-
-        vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
-
-        generarJsonFileVendedor(vendedores);
-
-        JOptionPane.showMessageDialog(this,"Vendedor creado correctamente");
+        
+        if (tfNombreVendedor.getText().isEmpty() || tfCantCarrosVendidos.getText().isEmpty() || tfCantDineroGenerado.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this,"Debe llenar todos los campos");
+        } else {
+            vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
+            JOptionPane.showMessageDialog(this,"Vendedor creado correctamente");
+            generarJsonFileVendedor(vendedores);
+        }
 
         tfNombreVendedor.setText("");
         tfCantCarrosVendidos.setText("");
@@ -356,15 +358,17 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numericos validos.", "Error", JOptionPane.ERROR_MESSAGE);
             return; 
         }
-        
-        clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
-        
+
         if (tfNombreCliente.getText().isEmpty() || tfEdadCliente.getText().isEmpty() || tfProfesionCliente.getText().isEmpty()
             || tfCantCarrosComprados.getText().isEmpty() || tfSueldoDisponible.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         } else {
+            clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
+            JOptionPane.showMessageDialog(this, "Cliente creado correctamente");
             generarJsonFileClientes(clientes);
         }
+        
+        clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
         
         tfNombreCliente.setText("");
         tfEdadCliente.setText("");
@@ -386,12 +390,19 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numericos validos.", "Error", JOptionPane.ERROR_MESSAGE);
             return; 
         }
-        
+       
         if (tfMarcaVehiculo.getText().isEmpty() || tfModeloVehiculo.getText().isEmpty() || tfPrecioVehiculo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         } else {
+            vehiculos.add(new Vehiculo(marcaVehiculo, colorVehiculo, modeloVehiculo, año, precioVenta));
+            JOptionPane.showMessageDialog(this,"Vehiculo creado correctamente");
             generarJsonFileVehiculos(vehiculos);
-        } 
+        }
+
+        tfMarcaVehiculo.setText("");
+        btnColor.setBackground(Color.white);
+        tfModeloVehiculo.setText("");
+        tfPrecioVehiculo.setText("");
     }//GEN-LAST:event_btnCrearVehiculoMouseClicked
 
     private void btnColorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMouseClicked
