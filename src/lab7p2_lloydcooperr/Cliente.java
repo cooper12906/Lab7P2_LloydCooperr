@@ -61,6 +61,6 @@ public class Cliente {
                 ", edadCliente=" + edadCliente + 
                 ", profesionCliente=" + profesionCliente + 
                 ", cantCarrosComprados=" + cantCarrosComprados + 
-                ", sueldoDisponible=" + sueldoDisponible;
+                ", sueldoDisponible=" + sueldoDisponible    ;
     }
 }

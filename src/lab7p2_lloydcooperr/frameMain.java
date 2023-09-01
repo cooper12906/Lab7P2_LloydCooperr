@@ -1,10 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package lab7p2_lloydcooperr;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +18,7 @@ public class frameMain extends javax.swing.JFrame {
     
     public frameMain() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,6 +40,17 @@ public class frameMain extends javax.swing.JFrame {
         tfCantCarrosVendidos = new javax.swing.JTextField();
         tfCantDineroGenerado = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        tfNombreCliente = new javax.swing.JTextField();
+        tfEdadCliente = new javax.swing.JTextField();
+        tfProfesionCliente = new javax.swing.JTextField();
+        tfCantCarrosComprados = new javax.swing.JTextField();
+        tfSueldoDisponible = new javax.swing.JTextField();
+        btnCrearCliente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,15 +120,83 @@ public class frameMain extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Nombre");
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Edad");
+
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Profesion");
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Cantidad de carros comprados");
+
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setText("Sueldo disponible");
+
+        btnCrearCliente.setText("Crear cliente");
+        btnCrearCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrearClienteMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addGap(80, 80, 80)
+                            .addComponent(tfSueldoDisponible, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tfCantCarrosComprados))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6))
+                            .addGap(122, 122, 122)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfNombreCliente)
+                                .addComponent(tfEdadCliente)
+                                .addComponent(tfProfesionCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))))
+                    .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(tfEdadCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(tfProfesionCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfCantCarrosComprados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(tfSueldoDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCrearCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear cliente", jPanel2);
@@ -151,9 +231,115 @@ public class frameMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearVendedorMouseClicked
-        
+        String nombreVendedor = tfNombreVendedor.getText();
+        int cantCarrosVendidos = 0;
+        int cantDineroGenerado = 0;
+
+        try {
+            cantCarrosVendidos = Integer.parseInt(tfCantCarrosVendidos.getText());
+            cantDineroGenerado = Integer.parseInt(tfCantDineroGenerado.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+
+        vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
+
+        generarJsonFileVendedor(vendedores);
+
+        JOptionPane.showMessageDialog(this,"Vendedor creado correctamente");
+
+        tfNombreVendedor.setText("");
+        tfCantCarrosVendidos.setText("");
+        tfCantDineroGenerado.setText("");
     }//GEN-LAST:event_btnCrearVendedorMouseClicked
 
+    private void btnCrearClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearClienteMouseClicked
+        String nombreCliente = tfNombreCliente.getText();
+        int edadCliente = 0;
+        String profesionCliente = tfProfesionCliente.getText();
+        int cantCarrosComprados = 0;
+        int sueldoDisponible = 0;
+        
+        try {
+            edadCliente = Integer.parseInt(tfEdadCliente.getText());
+            cantCarrosComprados = Integer.parseInt(tfCantCarrosComprados.getText());
+            sueldoDisponible = Integer.parseInt(tfSueldoDisponible.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        
+        clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
+        
+        generarJsonFileClientes(clientes);
+        
+        tfNombreCliente.setText("");
+        tfEdadCliente.setText("");
+        tfProfesionCliente.setText("");
+        tfCantCarrosComprados.setText("");
+        tfSueldoDisponible.setText("");
+    }//GEN-LAST:event_btnCrearClienteMouseClicked
+
+    private void generarJsonFileVendedor(ArrayList vendedores) {
+        StringBuilder archivoJson = new StringBuilder();
+        archivoJson.append("[\n");
+
+        for (int i = 0; i < vendedores.size(); i++) {
+            Vendedor vendedor = (Vendedor) vendedores.get(i);
+
+            if (i > 0) {
+                archivoJson.append(",\n");
+            }
+
+            archivoJson.append("\t").append(vendedor.getNombreVendedor()).append(",\n");
+            archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append(",\n");
+            archivoJson.append("\t").append(vendedor.getCantDineroGenerado()).append("\n");
+        }
+
+        archivoJson.append("\n]");
+
+        String filePath = "src/vendedores.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(archivoJson.toString());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Archivo guardado exitosamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void generarJsonFileClientes(ArrayList clientes) {
+        StringBuilder archivoJson = new StringBuilder();
+        archivoJson.append("[\n");
+
+        for (int i = 0; i < clientes.size(); i++) {
+            Cliente cliente = (Cliente) clientes.get(i);
+
+            if (i > 0) {
+                archivoJson.append(",\n");
+            }
+
+            archivoJson.append("\t").append(cliente.getNombreCliente()).append(",\n");
+            archivoJson.append("\t").append(cliente.getEdadCliente()).append(",\n");
+            archivoJson.append("\t").append(cliente.getProfesionCliente()).append("\n");
+            archivoJson.append("\t").append(cliente.getCantCarrosComprados()).append("\n");
+            archivoJson.append("\t").append((char) cliente.getSueldoDisponible()).append("\n");
+        }
+
+        archivoJson.append("\n]");
+
+        String filePath = "src/clientes.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(archivoJson.toString());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Archivo guardado exitosamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -190,16 +376,27 @@ public class frameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearVendedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField tfCantCarrosComprados;
     private javax.swing.JTextField tfCantCarrosVendidos;
     private javax.swing.JTextField tfCantDineroGenerado;
+    private javax.swing.JTextField tfEdadCliente;
+    private javax.swing.JTextField tfNombreCliente;
     private javax.swing.JTextField tfNombreVendedor;
+    private javax.swing.JTextField tfProfesionCliente;
+    private javax.swing.JTextField tfSueldoDisponible;
     // End of variables declaration//GEN-END:variables
 }
