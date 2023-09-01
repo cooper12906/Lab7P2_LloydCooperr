@@ -1,9 +1,11 @@
 package lab7p2_lloydcooperr;
 
+import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,6 +54,17 @@ public class frameMain extends javax.swing.JFrame {
         tfSueldoDisponible = new javax.swing.JTextField();
         btnCrearCliente = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        tfMarcaVehiculo = new javax.swing.JTextField();
+        tfModeloVehiculo = new javax.swing.JTextField();
+        tfPrecioVehiculo = new javax.swing.JTextField();
+        ycAño = new com.toedter.calendar.JYearChooser();
+        btnColor = new javax.swing.JButton();
+        btnCrearVehiculo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,15 +216,89 @@ public class frameMain extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setText("Marca");
+
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("Color");
+
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel11.setText("Modelo");
+
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("Año");
+
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setText("Precio");
+
+        btnColor.setText("Elija color");
+        btnColor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnColorMouseClicked(evt);
+            }
+        });
+
+        btnCrearVehiculo.setText("Crear vehiculo");
+        btnCrearVehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCrearVehiculoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfMarcaVehiculo)
+                            .addComponent(tfModeloVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(tfPrecioVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(ycAño, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnColor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(btnCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(tfMarcaVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(btnColor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(tfModeloVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(tfPrecioVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ycAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnCrearVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear vehiculo", jPanel3);
@@ -266,13 +353,18 @@ public class frameMain extends javax.swing.JFrame {
             cantCarrosComprados = Integer.parseInt(tfCantCarrosComprados.getText());
             sueldoDisponible = Integer.parseInt(tfSueldoDisponible.getText());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numéricos válidos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numericos validos.", "Error", JOptionPane.ERROR_MESSAGE);
             return; 
         }
         
         clientes.add(new Cliente(nombreCliente, edadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
         
-        generarJsonFileClientes(clientes);
+        if (tfNombreCliente.getText().isEmpty() || tfEdadCliente.getText().isEmpty() || tfProfesionCliente.getText().isEmpty()
+            || tfCantCarrosComprados.getText().isEmpty() || tfSueldoDisponible.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        } else {
+            generarJsonFileClientes(clientes);
+        }
         
         tfNombreCliente.setText("");
         tfEdadCliente.setText("");
@@ -280,6 +372,31 @@ public class frameMain extends javax.swing.JFrame {
         tfCantCarrosComprados.setText("");
         tfSueldoDisponible.setText("");
     }//GEN-LAST:event_btnCrearClienteMouseClicked
+
+    private void btnCrearVehiculoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearVehiculoMouseClicked
+        String marcaVehiculo = tfMarcaVehiculo.getText();
+        Color colorVehiculo = btnColor.getBackground();
+        String modeloVehiculo = tfModeloVehiculo.getText();
+        String año = String.valueOf(ycAño.getY());
+        int precioVenta = 0;
+        
+        try {
+            precioVenta = Integer.parseInt(tfPrecioVehiculo.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese valores numericos validos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        
+        if (tfMarcaVehiculo.getText().isEmpty() || tfModeloVehiculo.getText().isEmpty() || tfPrecioVehiculo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
+        } else {
+            generarJsonFileVehiculos(vehiculos);
+        } 
+    }//GEN-LAST:event_btnCrearVehiculoMouseClicked
+
+    private void btnColorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnColorMouseClicked
+        btnColor.setBackground(JColorChooser.showDialog(this, "Elige un color para el carro: ", Color.yellow));
+    }//GEN-LAST:event_btnColorMouseClicked
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
@@ -340,6 +457,36 @@ public class frameMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    private void generarJsonFileVehiculos(ArrayList vehiculos) {
+        StringBuilder archivoJson = new StringBuilder();
+        archivoJson.append("[\n");
+
+        for (int i = 0; i < vehiculos.size(); i++) {
+            Vehiculo vehiculo = (Vehiculo) vehiculos.get(i);
+
+            if (i > 0) {
+                archivoJson.append(",\n");
+            }
+
+            archivoJson.append("\t").append(vehiculo.getMarcaVehiculo()).append(",\n");
+            archivoJson.append("\t").append(vehiculo.getModelo()).append(",\n");
+            archivoJson.append("\t").append(vehiculo.getAño()).append("\n");
+            archivoJson.append("\t").append(vehiculo.getPrecioVenta()).append("\n");
+        }
+
+        archivoJson.append("\n]");
+
+        String filePath = "src/vehiculos.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(archivoJson.toString());
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Archivo guardado exitosamente");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error al guardar el archivo", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -376,9 +523,15 @@ public class frameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnColor;
     private javax.swing.JButton btnCrearCliente;
+    private javax.swing.JButton btnCrearVehiculo;
     private javax.swing.JButton btnCrearVendedor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -386,6 +539,7 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -394,9 +548,13 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JTextField tfCantCarrosVendidos;
     private javax.swing.JTextField tfCantDineroGenerado;
     private javax.swing.JTextField tfEdadCliente;
+    private javax.swing.JTextField tfMarcaVehiculo;
+    private javax.swing.JTextField tfModeloVehiculo;
     private javax.swing.JTextField tfNombreCliente;
     private javax.swing.JTextField tfNombreVendedor;
+    private javax.swing.JTextField tfPrecioVehiculo;
     private javax.swing.JTextField tfProfesionCliente;
     private javax.swing.JTextField tfSueldoDisponible;
+    private com.toedter.calendar.JYearChooser ycAño;
     // End of variables declaration//GEN-END:variables
 }
