@@ -584,7 +584,7 @@ public class frameMain extends javax.swing.JFrame {
                                     + "\t" + sellers + "\n"
                                     + "\t" + clients + "\n"
                                     + "\t" + costo + "\n"
-                                    + "\t" + marca + "\n]\n";
+                                    + "\t" + marca + "\n]\n" ;
                 
                 bw.write(jsonVentas);
                 bw.flush();
@@ -611,21 +611,19 @@ public class frameMain extends javax.swing.JFrame {
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
-        archivoJson.append("[\n");
 
         for (int i = 0; i < vendedores.size(); i++) {
             Vendedor vendedor = (Vendedor) vendedores.get(i);
 
-            if (i > 0) {
-                archivoJson.append(",\n");
-            }
-
-            archivoJson.append("\t").append(vendedor.getNombreVendedor()).append(",\n");
-            archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append(",\n");
+            archivoJson.append("[").append("\n");
+            
+            archivoJson.append("\t").append(vendedor.getNombreVendedor()).append("\n");
+            archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append("\n");
             archivoJson.append("\t").append(vendedor.getCantDineroGenerado()).append("\n");
+
+            archivoJson.append("]").append("\n");
         }
 
-        archivoJson.append("\n]");
 
         String filePath = "src/vendedores.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -648,12 +646,15 @@ public class frameMain extends javax.swing.JFrame {
             if (i > 0) {
                 archivoJson.append(",\n");
             }
-
+            archivoJson.append("[").append("\n");
+            
             archivoJson.append("\t").append(cliente.getNombreCliente()).append(",\n");
             archivoJson.append("\t").append(cliente.getEdadCliente()).append(",\n");
             archivoJson.append("\t").append(cliente.getProfesionCliente()).append("\n");
             archivoJson.append("\t").append(cliente.getCantCarrosComprados()).append("\n");
             archivoJson.append("\t").append((char) cliente.getSueldoDisponible()).append("\n");
+            
+            archivoJson.append("[").append("\n");
         }
 
         archivoJson.append("\n]");
@@ -679,12 +680,15 @@ public class frameMain extends javax.swing.JFrame {
             if (i > 0) {
                 archivoJson.append(",\n");
             }
-
+            archivoJson.append("[").append("\n");
+            
             archivoJson.append("\t").append(vehiculo.getMarcaVehiculo()).append(",\n");
             archivoJson.append("\t").append(vehiculo.getColorVehiculo()).append("\n");
             archivoJson.append("\t").append(vehiculo.getModelo()).append(",\n");
             archivoJson.append("\t").append(vehiculo.getAño()).append("\n");
             archivoJson.append("\t").append(vehiculo.getPrecioVenta()).append("\n");
+            
+            archivoJson.append("[").append("\n");
         }
 
         archivoJson.append("\n]");

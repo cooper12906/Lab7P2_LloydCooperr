@@ -1,6 +1,10 @@
 [
-	Messi,
-	10,
-	10000
-
+	mbappe2
+	2
+	2
+]
+[
+	SERRESIETE
+	1
+	1
 ]

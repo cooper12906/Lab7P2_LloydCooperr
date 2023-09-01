@@ -1,8 +1,8 @@
 [
-	Koenigsegg,
-	Blanco
-	Jesko,
+	Pagani,
+	Negro
+	Huayra,
 	158
-	3400000
+	10000000
 
 ]

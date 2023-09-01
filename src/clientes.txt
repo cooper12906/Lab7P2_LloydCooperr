@@ -1,8 +1,8 @@
 [
-	CR7,
-	39,
+	Messi,
+	36,
 	Futbolista
-	50
-	
+	20
+	鐀
 
 ]
