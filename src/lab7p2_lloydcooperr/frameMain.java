@@ -584,7 +584,7 @@ public class frameMain extends javax.swing.JFrame {
                                     + "\t" + sellers + "\n"
                                     + "\t" + clients + "\n"
                                     + "\t" + costo + "\n"
-                                    + "\t" + marca + "\n";
+                                    + "\t" + marca + "\n]\n";
                 
                 bw.write(jsonVentas);
                 bw.flush();
@@ -603,7 +603,10 @@ public class frameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_treeDiaMouseClicked
 
     private void menuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarActionPerformed
-        
+        dialogModificarArchivo.pack();
+        dialogModificarArchivo.setModal(true);
+        dialogModificarArchivo.setLocationRelativeTo(this);
+        dialogModificarArchivo.setVisible(true);
     }//GEN-LAST:event_menuItemModificarActionPerformed
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
