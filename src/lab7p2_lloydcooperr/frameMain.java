@@ -36,8 +36,6 @@ public class frameMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        popupModificarArchivo = new javax.swing.JPopupMenu();
-        menuItemModificar = new javax.swing.JMenuItem();
         dialogModificarArchivo = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
         taListarArchivo = new javax.swing.JScrollPane();
@@ -88,14 +86,7 @@ public class frameMain extends javax.swing.JFrame {
         btnUpdateDiaTree = new javax.swing.JButton();
         btnUpdateAdminTree = new javax.swing.JButton();
         btnFinalizarDia = new javax.swing.JButton();
-
-        menuItemModificar.setText("Modificar archivo");
-        menuItemModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemModificarActionPerformed(evt);
-            }
-        });
-        popupModificarArchivo.add(menuItemModificar);
+        btnModifyArchive = new javax.swing.JButton();
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -413,16 +404,21 @@ public class frameMain extends javax.swing.JFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Venta");
         treeNode1.add(treeNode2);
         treeDia.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        treeDia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                treeDiaMouseClicked(evt);
-            }
-        });
         jScrollPane2.setViewportView(treeDia);
 
         btnUpdateDiaTree.setText("Update day tree");
+        btnUpdateDiaTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateDiaTreeMouseClicked(evt);
+            }
+        });
 
         btnUpdateAdminTree.setText("Update admin tree");
+        btnUpdateAdminTree.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateAdminTreeMouseClicked(evt);
+            }
+        });
 
         btnFinalizarDia.setText("Finalizar dia");
         btnFinalizarDia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -430,6 +426,13 @@ public class frameMain extends javax.swing.JFrame {
         btnFinalizarDia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnFinalizarDiaMouseClicked(evt);
+            }
+        });
+
+        btnModifyArchive.setText("Modificar archivo");
+        btnModifyArchive.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModifyArchiveMouseClicked(evt);
             }
         });
 
@@ -446,7 +449,8 @@ public class frameMain extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnUpdateAdminTree, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                     .addComponent(btnUpdateDiaTree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFinalizarDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFinalizarDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModifyArchive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -455,6 +459,8 @@ public class frameMain extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnModifyArchive)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFinalizarDia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdateDiaTree)
@@ -611,19 +617,6 @@ public class frameMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnHacerVentaMouseClicked
 
-    private void treeDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_treeDiaMouseClicked
-        if (evt.isMetaDown()) {
-            popupModificarArchivo.show(evt.getComponent(), evt.getX(), evt.getY());
-        }
-    }//GEN-LAST:event_treeDiaMouseClicked
-
-    private void menuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarActionPerformed
-        dialogModificarArchivo.pack();
-        dialogModificarArchivo.setModal(true);
-        dialogModificarArchivo.setLocationRelativeTo(this);
-        dialogModificarArchivo.setVisible(true);
-    }//GEN-LAST:event_menuItemModificarActionPerformed
-
     private void btnFinalizarDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarDiaMouseClicked
         int confirmar = JOptionPane.showConfirmDialog(this, "Desea confirmar?", "Confirmar", ConfirmationCallback.YES_NO_CANCEL_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
@@ -658,6 +651,21 @@ public class frameMain extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnFinalizarDiaMouseClicked
+
+    private void btnUpdateAdminTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateAdminTreeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateAdminTreeMouseClicked
+
+    private void btnUpdateDiaTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateDiaTreeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateDiaTreeMouseClicked
+
+    private void btnModifyArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyArchiveMouseClicked
+        dialogModificarArchivo.pack();
+        dialogModificarArchivo.setModal(true);
+        dialogModificarArchivo.setLocationRelativeTo(this);
+        dialogModificarArchivo.setVisible(true);
+    }//GEN-LAST:event_btnModifyArchiveMouseClicked
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
@@ -819,6 +827,7 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JButton btnFinalizarDia;
     private javax.swing.JButton btnHacerVenta;
     private javax.swing.JButton btnModificarArchivo;
+    private javax.swing.JButton btnModifyArchive;
     private javax.swing.JButton btnUpdateAdminTree;
     private javax.swing.JButton btnUpdateDiaTree;
     private javax.swing.JComboBox<String> cbCliente;
@@ -847,8 +856,6 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JMenuItem menuItemModificar;
-    private javax.swing.JPopupMenu popupModificarArchivo;
     private javax.swing.JScrollPane taListarArchivo;
     private javax.swing.JTextField tfCantCarrosComprados;
     private javax.swing.JTextField tfCantCarrosVendidos;

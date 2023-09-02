@@ -2,22 +2,6 @@
 
 <Form version="1.7" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JPopupMenu" name="popupModificarArchivo">
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="true"/>
-      </Layout>
-      <SubComponents>
-        <MenuItem class="javax.swing.JMenuItem" name="menuItemModificar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Modificar archivo"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemModificarActionPerformed"/>
-          </Events>
-        </MenuItem>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JDialog" name="dialogModificarArchivo">
 
       <Layout>
@@ -636,6 +620,7 @@
                           <Component id="btnUpdateAdminTree" pref="134" max="32767" attributes="0"/>
                           <Component id="btnUpdateDiaTree" max="32767" attributes="0"/>
                           <Component id="btnFinalizarDia" max="32767" attributes="0"/>
+                          <Component id="btnModifyArchive" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
@@ -647,6 +632,8 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnModifyArchive" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnFinalizarDia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnUpdateDiaTree" min="-2" max="-2" attributes="0"/>
@@ -690,9 +677,6 @@
                       <TreeModel code="Dia&#xa;  Venta&#xa;   &#xa;         "/>
                     </Property>
                   </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="treeDiaMouseClicked"/>
-                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -700,11 +684,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update day tree"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnUpdateDiaTreeMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnUpdateAdminTree">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Update admin tree"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnUpdateAdminTreeMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnFinalizarDia">
               <Properties>
@@ -714,6 +704,14 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnFinalizarDiaMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnModifyArchive">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Modificar archivo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnModifyArchiveMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
