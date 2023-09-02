@@ -1,6 +1,5 @@
 package lab7p2_lloydcooperr;
 
-import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JColorChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -30,6 +28,10 @@ public class frameMain extends javax.swing.JFrame {
     public frameMain() {
         initComponents();
         this.setLocationRelativeTo(null);
+        initializeSellerList();
+        initializeClientList();
+        initializeVehicleList();
+        initializeSellList();
     }
 
     /**
@@ -835,6 +837,108 @@ public class frameMain extends javax.swing.JFrame {
         }
         return modelo;
     }
+    
+    public ArrayList<ArrayList<String>> getLists(File archive) throws IOException{
+        ArrayList <ArrayList<String>> lists = new ArrayList();
+        ArrayList<String> listaActual = null;
+        BufferedReader br = null;
+        FileReader fr = null;
+        try {
+            fr = new FileReader(archive);
+            br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {                
+                if (line.contains("[")) {
+                    listaActual = new ArrayList<>();
+                } else if (line.contains("];")){
+                    if (listaActual != null) {
+                        lists.add(listaActual);
+                    } else if (listaActual != null && !line.trim().isEmpty()){
+                        listaActual.add(line.trim());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lists;
+    }
+    
+    public void initializeSellerList(){
+        try {
+            File file = new File("src/vendedores.txt");
+            ArrayList<ArrayList<String>> lists = getLists(archive);
+            for (ArrayList<String> list : lists) {
+                if (list.size() == 3) {
+                    String nombreVendedor = String.valueOf(list.get(0));
+                    int cantCarrosVendidos = Integer.parseInt(list.get(1));
+                    int cantDineroGenerado = Integer.parseInt(list.get(2));
+                    vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void initializeClientList(){
+        try {
+            File file = new File("src/clientes.txt");
+            ArrayList<ArrayList<String>> lists = getLists(archive);
+            for (ArrayList<String> list : lists) {
+                if (list.size() == 5) {
+                    String nombreCliente = String.valueOf(list.get(0));
+                    int EdadCliente = Integer.parseInt(list.get(1));
+                    String profesionCliente = String.valueOf(list.get(2));
+                    int cantCarrosComprados = Integer.parseInt(list.get(3));
+                    int sueldoDisponible = Integer.parseInt(list.get(4));
+                    clientes.add(new Cliente(nombreCliente, EdadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void initializeVehicleList(){
+        try {
+            File file = new File("src/vehiculos.txt");
+            ArrayList<ArrayList<String>> lists = getLists(archive);
+            for (ArrayList<String> list : lists) {
+                if (list.size() == 6) {
+                    String marca = list.get(0);
+                    String color = list.get(1);
+                    String modelo = list.get(2);
+                    String año = String.valueOf(list.get(3));
+                    int idCarro = Integer.parseInt(list.get(4));
+                    int precio = Integer.parseInt(list.get(5));
+                    vehiculos.add(new Vehiculo(marca, color, modelo, año,precio));     
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void initializeSellList(){
+        try {
+            File file = new File("src/ventas.txt");
+            ArrayList<ArrayList<String>> lists = getLists(archive);
+            for (ArrayList<String> list : lists) {
+                if (list.size() == 5) {
+                    String vendedor = list.get(0);
+                    String cliente = list.get(1);
+                    int costoTransaccion = Integer.parseInt(list.get(2));
+                    String carroVendido = list.get(3);
+                    int idCarro = Integer.parseInt(list.get(4));
+                    ventas.add(new Venta(vendedor, cliente, costoTransaccion, carroVendido, idCarro));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
