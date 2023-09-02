@@ -683,40 +683,39 @@ public class frameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateAdminTreeMouseClicked
 
     private void btnUpdateDiaTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateDiaTreeMouseClicked
-        // Obtén el modelo de árbol actual
-    DefaultTreeModel treeModel = (DefaultTreeModel) treeDia.getModel();
+    
+        DefaultTreeModel treeModel = (DefaultTreeModel) treeDia.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) treeModel.getRoot();
 
-    // Obtén la raíz del árbol
-    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) treeModel.getRoot();
 
-    // Encuentra el nodo "Archivo Dia"
-    DefaultMutableTreeNode archivoDiaNode = null;
-    Enumeration<TreeNode> nodes = raiz.breadthFirstEnumeration();
-    while (nodes.hasMoreElements()) {
-        DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) nodes.nextElement();
-        if (currentNode.getUserObject().toString().equals("Archivo Dia")) {
-            archivoDiaNode = currentNode;
-            break;
+        DefaultMutableTreeNode archivoDiaNode = null;
+        Enumeration<TreeNode> archivoDiaChildren = raiz.children();
+
+        while (archivoDiaChildren.hasMoreElements()) {
+            DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) archivoDiaChildren.nextElement();
+            if (currentNode.toString().equals("Dia")) {
+                archivoDiaNode = currentNode;
+                break;
+            }
         }
-    }
 
-    if (archivoDiaNode != null) {
-        // Crea un nuevo nodo para la venta
-        DefaultMutableTreeNode ventaNode = new DefaultMutableTreeNode("Venta");
+        if (archivoDiaNode != null) {
+            // Supongamos que tienes una lista de nombres de vendedores y compradores
+            String[] nombresVendedores = { "Fernando", "OtroVendedor" };
+            String[] nombresCompradores = { "Jesus", "OtroComprador" };
 
-        // Agrega los datos de la venta como hijos del nodo "Venta"
-        ventaNode.add(new DefaultMutableTreeNode("nombreVendedor"));
-        ventaNode.add(new DefaultMutableTreeNode("nombreComprador"));
+            for (int i = 0; i < nombresVendedores.length; i++) {
+                DefaultMutableTreeNode nodoVendedor = new DefaultMutableTreeNode(nombresVendedores[i]);
+                DefaultMutableTreeNode nodoComprador = new DefaultMutableTreeNode(nombresCompradores[i]);
+                nodoVendedor.add(nodoComprador);
+                archivoDiaNode.add(nodoVendedor);
+            }
 
-        // Agrega el nodo "Venta" como hijo del nodo "Archivo Dia"
-        archivoDiaNode.add(ventaNode);
+            treeModel.nodeStructureChanged(archivoDiaNode);
 
-        // Notifica al modelo de árbol que se ha realizado un cambio
-        treeModel.nodeStructureChanged(raiz);
+            treeDia.updateUI();
+        }
 
-        // Actualiza la vista del árbol
-        treeDia.updateUI();
-    }
     }//GEN-LAST:event_btnUpdateDiaTreeMouseClicked
 
     public void inicializarIdCarro(){
