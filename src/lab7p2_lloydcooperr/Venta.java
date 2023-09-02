@@ -5,12 +5,14 @@ public class Venta {
     private String cliente;
     private int costoTransaccion;
     private String carroVendido;
+    private int idCarro;
 
-    public Venta(String vendedor, String cliente, int costoTransaccion, String carroVendido) {
+    public Venta(String vendedor, String cliente, int costoTransaccion, String carroVendido, int idCarro) {
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.costoTransaccion = costoTransaccion;
         this.carroVendido = carroVendido;
+        this.idCarro = idCarro;
     }
 
     public String getVendedor() {
@@ -44,6 +46,16 @@ public class Venta {
     public void setCarroVendido(String carroVendido) {
         this.carroVendido = carroVendido;
     }
+
+    public int getIdCarro() {
+        return idCarro;
+    }
+
+    public void setIdCarro(int idCarro) {
+        this.idCarro = idCarro;
+    }
+
+   
 
     @Override
     public String toString() {

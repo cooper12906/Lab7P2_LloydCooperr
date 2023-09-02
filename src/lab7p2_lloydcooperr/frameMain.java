@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
 import javax.swing.JOptionPane;
@@ -86,6 +87,7 @@ public class frameMain extends javax.swing.JFrame {
         treeDia = new javax.swing.JTree();
         btnUpdateDiaTree = new javax.swing.JButton();
         btnUpdateAdminTree = new javax.swing.JButton();
+        btnFinalizarDia = new javax.swing.JButton();
 
         menuItemModificar.setText("Modificar archivo");
         menuItemModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -422,6 +424,15 @@ public class frameMain extends javax.swing.JFrame {
 
         btnUpdateAdminTree.setText("Update admin tree");
 
+        btnFinalizarDia.setText("Finalizar dia");
+        btnFinalizarDia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFinalizarDia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFinalizarDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFinalizarDiaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -434,7 +445,8 @@ public class frameMain extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnUpdateAdminTree, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                    .addComponent(btnUpdateDiaTree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnUpdateDiaTree, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFinalizarDia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -443,6 +455,8 @@ public class frameMain extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFinalizarDia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdateDiaTree)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnUpdateAdminTree))
@@ -560,7 +574,7 @@ public class frameMain extends javax.swing.JFrame {
         tfModeloVehiculo.setText("");
         tfPrecioVehiculo.setText("");
     }//GEN-LAST:event_btnCrearVehiculoMouseClicked
-
+    int idCarro = 0;
     private void btnHacerVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHacerVentaMouseClicked
         if (cbVendedor.getSelectedIndex() >= 0 || cbCliente.getSelectedIndex() >= 0 || cbVehiculo.getSelectedIndex() >= 0) {
             Vendedor vendedor = vendedores.get(cbVendedor.getSelectedIndex());
@@ -570,7 +584,8 @@ public class frameMain extends javax.swing.JFrame {
             String sellers = vendedor.getNombreVendedor();
             int costo = vehiculo.getPrecioVenta();
             String marca = vehiculo.getMarcaVehiculo();
-            ventas.add(new Venta(sellers, clients, costo, marca));
+            
+            ventas.add(new Venta(sellers, clients, costo, clients, idCarro));
             JOptionPane.showMessageDialog(this, "Venta realizada correctamente");
             File file = null;
             FileWriter fw = null;
@@ -608,6 +623,40 @@ public class frameMain extends javax.swing.JFrame {
         dialogModificarArchivo.setLocationRelativeTo(this);
         dialogModificarArchivo.setVisible(true);
     }//GEN-LAST:event_menuItemModificarActionPerformed
+
+    private void btnFinalizarDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarDiaMouseClicked
+        int confirmar = JOptionPane.showConfirmDialog(this, "Desea confirmar?", "Confirmar", ConfirmationCallback.YES_NO_CANCEL_OPTION);
+        if (confirmar == JOptionPane.YES_OPTION) {
+            String path = "";
+            File file = null;
+            FileWriter fw = null;
+            BufferedWriter bw = null;
+            String line = "";
+            path += JOptionPane.showInputDialog("Ingrese el nombre del archivo de actividad");
+            path += ".txt";
+            
+            try {
+                file = new File(path);
+                fw = new FileWriter(file, true);
+                bw = new BufferedWriter(fw);
+                int contador = 1;
+                for (Venta venta : ventas) {
+                    line = "[\n"
+                           + "\t" + contador + "\n"
+                           + "\t" + venta.getCliente() + "\n"
+                           + "\t" + venta.getVendedor() + "\n"
+                           + "\t" + venta.getCarroVendido() + "\n"
+                           + "\t" + venta.getIdCarro() + "\n]\n" ;
+                    bw.write(line);
+                    contador++;
+                }
+                bw.flush();
+                fw.close();
+                bw.close();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_btnFinalizarDiaMouseClicked
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
@@ -766,6 +815,7 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JButton btnCrearCliente;
     private javax.swing.JButton btnCrearVehiculo;
     private javax.swing.JButton btnCrearVendedor;
+    private javax.swing.JButton btnFinalizarDia;
     private javax.swing.JButton btnHacerVenta;
     private javax.swing.JButton btnModificarArchivo;
     private javax.swing.JButton btnUpdateAdminTree;
