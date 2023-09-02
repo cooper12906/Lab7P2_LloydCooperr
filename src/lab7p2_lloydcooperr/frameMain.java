@@ -627,7 +627,7 @@ public class frameMain extends javax.swing.JFrame {
     private void btnFinalizarDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizarDiaMouseClicked
         int confirmar = JOptionPane.showConfirmDialog(this, "Desea confirmar?", "Confirmar", ConfirmationCallback.YES_NO_CANCEL_OPTION);
         if (confirmar == JOptionPane.YES_OPTION) {
-            String path = "";
+            String path = "src/";
             File file = null;
             FileWriter fw = null;
             BufferedWriter bw = null;
@@ -653,6 +653,7 @@ public class frameMain extends javax.swing.JFrame {
                 bw.flush();
                 fw.close();
                 bw.close();
+                ventas.clear();
             } catch (Exception e) {
             }
         }
