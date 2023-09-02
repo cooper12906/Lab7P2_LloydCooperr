@@ -28,7 +28,13 @@ public class frameMain extends javax.swing.JFrame {
     public frameMain() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        initializeSellerList();
+        initializeClientList();
+        initializeVehicleList();
+        initializeSellList();
+        cbVendedor.setModel(updateComboBoxVendedores());
+        cbCliente.setModel(updateComboBoxClientes());
+        cbVehiculo.setModel(updateComboBoxVehiculos());
     }
 
     /**
@@ -571,6 +577,7 @@ public class frameMain extends javax.swing.JFrame {
         String colorVehiculo = tfColorVehiculo.getText();
         String modeloVehiculo = tfModeloVehiculo.getText();
         String año = String.valueOf(ycAño.getY());
+        
         int precioVenta = 0;
         
         try {
@@ -583,7 +590,8 @@ public class frameMain extends javax.swing.JFrame {
         if (tfMarcaVehiculo.getText().isEmpty() || tfModeloVehiculo.getText().isEmpty() || tfPrecioVehiculo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe llenar todos los campos");
         } else {
-            vehiculos.add(new Vehiculo(marcaVehiculo, colorVehiculo, modeloVehiculo, año, precioVenta));
+            vehiculos.add(new Vehiculo(marcaVehiculo, colorVehiculo, modeloVehiculo, año, idCarro, precioVenta));
+            idCarro++;
             cbVehiculo.setModel(updateComboBoxVehiculos());
             JOptionPane.showMessageDialog(this,"Vehiculo creado correctamente");
             generarJsonFileVehiculos(vehiculos);
@@ -616,9 +624,9 @@ public class frameMain extends javax.swing.JFrame {
                 bw = new BufferedWriter(fw);
                 
                 String jsonVentas = "[\n"
-                                    + "\t" + sellers + "\n"
-                                    + "\t" + clients + "\n"
-                                    + "\t" + costo + "\n"
+                                    + "\t" + sellers + ",\n"
+                                    + "\t" + clients + ",\n"
+                                    + "\t" + costo + ",\n"
                                     + "\t" + marca + "\n];\n" ;
                 
                 bw.write(jsonVentas);
@@ -650,9 +658,9 @@ public class frameMain extends javax.swing.JFrame {
                 for (Venta venta : ventas) {
                     line = "[\n"
                            + "\t" + contador + "\n"
-                           + "\t" + venta.getCliente() + "\n"
-                           + "\t" + venta.getVendedor() + "\n"
-                           + "\t" + venta.getCarroVendido() + "\n"
+                           + "\t" + venta.getCliente() + ",\n"
+                           + "\t" + venta.getVendedor() + ",\n"
+                           + "\t" + venta.getCarroVendido() + ",\n"
                            + "\t" + venta.getIdCarro() + "\n];\n" ;
                     bw.write(line);
                     contador++;
@@ -729,8 +737,8 @@ public class frameMain extends javax.swing.JFrame {
 
             archivoJson.append("[").append("\n");
             
-            archivoJson.append("\t").append(vendedor.getNombreVendedor()).append("\n");
-            archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append("\n");
+            archivoJson.append("\t").append(vendedor.getNombreVendedor()).append(",\n");
+            archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append(",\n");
             archivoJson.append("\t").append(vendedor.getCantDineroGenerado()).append("\n");
 
             archivoJson.append("];").append("\n");
@@ -761,9 +769,9 @@ public class frameMain extends javax.swing.JFrame {
             
             archivoJson.append("\t").append(cliente.getNombreCliente()).append(",\n");
             archivoJson.append("\t").append(cliente.getEdadCliente()).append(",\n");
-            archivoJson.append("\t").append(cliente.getProfesionCliente()).append("\n");
-            archivoJson.append("\t").append(cliente.getCantCarrosComprados()).append("\n");
-            archivoJson.append("\t").append((char) cliente.getSueldoDisponible()).append("\n");
+            archivoJson.append("\t").append(cliente.getProfesionCliente()).append(",\n");
+            archivoJson.append("\t").append(cliente.getCantCarrosComprados()).append(",\n");
+            archivoJson.append("\t").append( cliente.getSueldoDisponible()).append("\n");
             
             archivoJson.append("];").append("\n");
         }
@@ -791,9 +799,10 @@ public class frameMain extends javax.swing.JFrame {
             archivoJson.append("[").append("\n");
             
             archivoJson.append("\t").append(vehiculo.getMarcaVehiculo()).append(",\n");
-            archivoJson.append("\t").append(vehiculo.getColorVehiculo()).append("\n");
+            archivoJson.append("\t").append(vehiculo.getColorVehiculo()).append(",\n");
             archivoJson.append("\t").append(vehiculo.getModelo()).append(",\n");
-            archivoJson.append("\t").append(vehiculo.getAño()).append("\n");
+            archivoJson.append("\t").append(vehiculo.getAño()).append(",\n");
+            archivoJson.append("\t").append(vehiculo.getIdCarro()).append(",\n");
             archivoJson.append("\t").append(vehiculo.getPrecioVenta()).append("\n");
             
             archivoJson.append("];").append("\n");
@@ -850,10 +859,10 @@ public class frameMain extends javax.swing.JFrame {
                 } else if (line.contains("];")){
                     if (listaActual != null) {
                         lists.add(listaActual);
-                    } else if (listaActual != null && !line.trim().isEmpty()){
+                    }
+                }else if(listaActual != null && !line.trim().isEmpty()){
                         listaActual.add(line.trim());
                     }
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -864,12 +873,12 @@ public class frameMain extends javax.swing.JFrame {
     public void initializeSellerList(){
         try {
             File file = new File("src/vendedores.txt");
-            ArrayList<ArrayList<String>> lists = getLists(archive);
+            ArrayList<ArrayList<String>> lists = getLists(file);
             for (ArrayList<String> list : lists) {
                 if (list.size() == 3) {
-                    String nombreVendedor = String.valueOf(list.get(0));
-                    int cantCarrosVendidos = Integer.parseInt(list.get(1));
-                    int cantDineroGenerado = Integer.parseInt(list.get(2));
+                    String nombreVendedor = String.valueOf(list.get(0).replace(",", ""));
+                    int cantCarrosVendidos = Integer.parseInt(list.get(1).replace(",", ""));
+                    int cantDineroGenerado = Integer.parseInt(list.get(2).replace(",", ""));
                     vendedores.add(new Vendedor(nombreVendedor, cantCarrosVendidos, cantDineroGenerado));
                 }
             }
@@ -881,14 +890,14 @@ public class frameMain extends javax.swing.JFrame {
     public void initializeClientList(){
         try {
             File file = new File("src/clientes.txt");
-            ArrayList<ArrayList<String>> lists = getLists(archive);
+            ArrayList<ArrayList<String>> lists = getLists(file);
             for (ArrayList<String> list : lists) {
                 if (list.size() == 5) {
-                    String nombreCliente = String.valueOf(list.get(0));
-                    int EdadCliente = Integer.parseInt(list.get(1));
-                    String profesionCliente = String.valueOf(list.get(2));
-                    int cantCarrosComprados = Integer.parseInt(list.get(3));
-                    int sueldoDisponible = Integer.parseInt(list.get(4));
+                    String nombreCliente = String.valueOf(list.get(0).replace(",", ""));
+                    int EdadCliente = Integer.parseInt(list.get(1).replace(",", ""));
+                    String profesionCliente = String.valueOf(list.get(2).replace(",", ""));
+                    int cantCarrosComprados = Integer.parseInt(list.get(3).replace(",", ""));
+                    int sueldoDisponible = Integer.parseInt(list.get(4).replace(",", ""));
                     clientes.add(new Cliente(nombreCliente, EdadCliente, profesionCliente, cantCarrosComprados, sueldoDisponible));
                 }
             }
@@ -900,16 +909,16 @@ public class frameMain extends javax.swing.JFrame {
     public void initializeVehicleList(){
         try {
             File file = new File("src/vehiculos.txt");
-            ArrayList<ArrayList<String>> lists = getLists(archive);
+            ArrayList<ArrayList<String>> lists = getLists(file);
             for (ArrayList<String> list : lists) {
                 if (list.size() == 6) {
-                    String marca = list.get(0);
-                    String color = list.get(1);
-                    String modelo = list.get(2);
-                    String año = String.valueOf(list.get(3));
-                    int idCarro = Integer.parseInt(list.get(4));
-                    int precio = Integer.parseInt(list.get(5));
-                    vehiculos.add(new Vehiculo(marca, color, modelo, año,precio));     
+                    String marca = list.get(0).replace(",", "");
+                    String color = list.get(1).replace(",", "");
+                    String modelo = list.get(2).replace(",", "");
+                    String año = String.valueOf(list.get(3).replace(",", ""));
+                    int idCarro = Integer.parseInt(list.get(4).replace(",", ""));
+                    int precio = Integer.parseInt(list.get(5).replace(",", ""));
+                    vehiculos.add(new Vehiculo(marca, color, modelo, año, idCarro, precio));     
                 }
             }
         } catch (Exception e) {
@@ -920,14 +929,14 @@ public class frameMain extends javax.swing.JFrame {
     public void initializeSellList(){
         try {
             File file = new File("src/ventas.txt");
-            ArrayList<ArrayList<String>> lists = getLists(archive);
+            ArrayList<ArrayList<String>> lists = getLists(file);
             for (ArrayList<String> list : lists) {
                 if (list.size() == 5) {
-                    String vendedor = list.get(0);
-                    String cliente = list.get(1);
-                    int costoTransaccion = Integer.parseInt(list.get(2));
-                    String carroVendido = list.get(3);
-                    int idCarro = Integer.parseInt(list.get(4));
+                    String vendedor = list.get(0).replace(",", "");
+                    String cliente = list.get(1).replace(",", "");
+                    int costoTransaccion = Integer.parseInt(list.get(2).replace(",", ""));
+                    String carroVendido = list.get(3).replace(",", "");
+                    int idCarro = Integer.parseInt(list.get(4).replace(",", ""));
                     ventas.add(new Venta(vendedor, cliente, costoTransaccion, carroVendido, idCarro));
                 }
             }

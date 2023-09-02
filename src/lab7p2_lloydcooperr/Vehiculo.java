@@ -7,13 +7,15 @@ public class Vehiculo {
     private String colorVehiculo;
     private String modelo;
     private String año;
+    private int idCarro;
     private int precioVenta;
 
-    public Vehiculo(String marcaVehiculo, String colorVehiculo, String modelo, String año, int precioVenta) {
+    public Vehiculo(String marcaVehiculo, String colorVehiculo, String modelo, String año, int idCarro, int precioVenta) {
         this.marcaVehiculo = marcaVehiculo;
         this.colorVehiculo = colorVehiculo;
         this.modelo = modelo;
         this.año = año;
+        this.idCarro = idCarro;
         this.precioVenta = precioVenta;
     }
 
@@ -47,6 +49,14 @@ public class Vehiculo {
 
     public void setAño(String año) {
         this.año = año;
+    }
+
+    public int getIdCarro() {
+        return idCarro;
+    }
+
+    public void setIdCarro(int idCarro) {
+        this.idCarro = idCarro;
     }
 
     public int getPrecioVenta() {

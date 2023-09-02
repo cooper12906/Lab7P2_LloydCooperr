@@ -1,8 +1,7 @@
 [
-	Messi,
-	36,
-	Futbolista
-	20
-	鐀
-
-]
+	Jesus,
+	19,
+	Maestro,
+	1,
+	30000
+];

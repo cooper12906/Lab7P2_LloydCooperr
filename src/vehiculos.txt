@@ -1,8 +1,8 @@
 [
-	Pagani,
-	Negro
-	Huayra,
-	158
-	10000000
-
-]
+	Toyota,
+	Azul,
+	Corolla,
+	158,
+	0,
+	200000
+];

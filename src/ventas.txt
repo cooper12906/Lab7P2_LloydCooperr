@@ -1,17 +1,6 @@
 [
-	Messi
-	CR7
-	3400000
-	Koenigsegg
-[
-	CR7
-	Messi
-	10000000
-	Pagani
-]
-[
-	CR7
-	Messi
-	10000000
-	Pagani
-]
+	Fernando
+	Jesus
+	200000
+	Tesla
+];
