@@ -700,7 +700,6 @@ public class frameMain extends javax.swing.JFrame {
         }
 
         if (archivoDiaNode != null) {
-            // Supongamos que tienes una lista de nombres de vendedores y compradores
             String[] nombresVendedores = { "Fernando", "OtroVendedor" };
             String[] nombresCompradores = { "Jesus", "OtroComprador" };
 
