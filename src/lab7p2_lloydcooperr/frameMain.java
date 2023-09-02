@@ -605,7 +605,7 @@ public class frameMain extends javax.swing.JFrame {
                                     + "\t" + sellers + "\n"
                                     + "\t" + clients + "\n"
                                     + "\t" + costo + "\n"
-                                    + "\t" + marca + "\n]\n" ;
+                                    + "\t" + marca + "\n];\n" ;
                 
                 bw.write(jsonVentas);
                 bw.flush();
@@ -639,7 +639,7 @@ public class frameMain extends javax.swing.JFrame {
                            + "\t" + venta.getCliente() + "\n"
                            + "\t" + venta.getVendedor() + "\n"
                            + "\t" + venta.getCarroVendido() + "\n"
-                           + "\t" + venta.getIdCarro() + "\n]\n" ;
+                           + "\t" + venta.getIdCarro() + "\n];\n" ;
                     bw.write(line);
                     contador++;
                 }
@@ -679,7 +679,7 @@ public class frameMain extends javax.swing.JFrame {
             archivoJson.append("\t").append(vendedor.getCantCarrosVendidos()).append("\n");
             archivoJson.append("\t").append(vendedor.getCantDineroGenerado()).append("\n");
 
-            archivoJson.append("]").append("\n");
+            archivoJson.append("];").append("\n");
         }
 
 
@@ -696,7 +696,6 @@ public class frameMain extends javax.swing.JFrame {
 
     private void generarJsonFileClientes(ArrayList clientes) {
         StringBuilder archivoJson = new StringBuilder();
-        archivoJson.append("[\n");
 
         for (int i = 0; i < clientes.size(); i++) {
             Cliente cliente = (Cliente) clientes.get(i);
@@ -712,10 +711,8 @@ public class frameMain extends javax.swing.JFrame {
             archivoJson.append("\t").append(cliente.getCantCarrosComprados()).append("\n");
             archivoJson.append("\t").append((char) cliente.getSueldoDisponible()).append("\n");
             
-            archivoJson.append("[").append("\n");
+            archivoJson.append("];").append("\n");
         }
-
-        archivoJson.append("\n]");
 
         String filePath = "src/clientes.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
@@ -730,7 +727,6 @@ public class frameMain extends javax.swing.JFrame {
     
     private void generarJsonFileVehiculos(ArrayList vehiculos) {
         StringBuilder archivoJson = new StringBuilder();
-        archivoJson.append("[\n");
 
         for (int i = 0; i < vehiculos.size(); i++) {
             Vehiculo vehiculo = (Vehiculo) vehiculos.get(i);
@@ -746,10 +742,9 @@ public class frameMain extends javax.swing.JFrame {
             archivoJson.append("\t").append(vehiculo.getAño()).append("\n");
             archivoJson.append("\t").append(vehiculo.getPrecioVenta()).append("\n");
             
-            archivoJson.append("[").append("\n");
+            archivoJson.append("];").append("\n");
         }
 
-        archivoJson.append("\n]");
 
         String filePath = "src/vehiculos.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
