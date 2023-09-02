@@ -101,6 +101,11 @@ public class frameMain extends javax.swing.JFrame {
         scrollPane1.setViewportView(taListarArchivo);
 
         btnModificarArchivo.setText("Modificar archivo");
+        btnModificarArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarArchivoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -674,7 +679,7 @@ public class frameMain extends javax.swing.JFrame {
         
         try {
             JFileChooser JFC = new JFileChooser();
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", ".txt");
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", "txt");
             JFC.setFileFilter(filter);
             FileReader fr = null;
             BufferedReader br = null;
@@ -698,6 +703,24 @@ public class frameMain extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_btnModifyArchiveMouseClicked
+
+    private void btnModificarArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarArchivoMouseClicked
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        if (JOptionPane.showConfirmDialog(this, "Desea modificar el archivo?", 
+                "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+            try {
+                fw = new FileWriter(archive,false);
+                bw = new BufferedWriter(fw);
+                bw.write(taListarArchivo.getText());
+                bw.flush();
+                fw.close();
+                bw.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_btnModificarArchivoMouseClicked
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
         StringBuilder archivoJson = new StringBuilder();
