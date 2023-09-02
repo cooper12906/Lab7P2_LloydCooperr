@@ -1,15 +1,19 @@
 package lab7p2_lloydcooperr;
 
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -21,6 +25,7 @@ public class frameMain extends javax.swing.JFrame {
     private ArrayList <Cliente> clientes = new ArrayList();
     private ArrayList <Vehiculo> vehiculos = new ArrayList();
     private ArrayList <Venta> ventas = new ArrayList();
+    File archive = null;
     
     public frameMain() {
         initComponents();
@@ -38,7 +43,8 @@ public class frameMain extends javax.swing.JFrame {
 
         dialogModificarArchivo = new javax.swing.JDialog();
         jPanel6 = new javax.swing.JPanel();
-        taListarArchivo = new javax.swing.JScrollPane();
+        scrollPane1 = new javax.swing.JScrollPane();
+        taListarArchivo = new javax.swing.JTextArea();
         btnModificarArchivo = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -90,6 +96,10 @@ public class frameMain extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
+        taListarArchivo.setColumns(20);
+        taListarArchivo.setRows(5);
+        scrollPane1.setViewportView(taListarArchivo);
+
         btnModificarArchivo.setText("Modificar archivo");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -99,15 +109,15 @@ public class frameMain extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(taListarArchivo)
-                    .addComponent(btnModificarArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
+                    .addComponent(scrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                    .addComponent(btnModificarArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(taListarArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnModificarArchivo)
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -661,10 +671,32 @@ public class frameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateDiaTreeMouseClicked
 
     private void btnModifyArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyArchiveMouseClicked
-        dialogModificarArchivo.pack();
-        dialogModificarArchivo.setModal(true);
-        dialogModificarArchivo.setLocationRelativeTo(this);
-        dialogModificarArchivo.setVisible(true);
+        
+        try {
+            JFileChooser JFC = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de texto", ".txt");
+            JFC.setFileFilter(filter);
+            FileReader fr = null;
+            BufferedReader br = null;
+            int select = JFC.showOpenDialog(this);
+            if (select == JFileChooser.APPROVE_OPTION) {
+                archive = JFC.getSelectedFile();
+                fr = new FileReader(archive);
+                br = new BufferedReader(fr);
+                String line;
+                taListarArchivo.setText("");
+                while ((line = br.readLine()) != null) {                    
+                    taListarArchivo.append(line);
+                    taListarArchivo.append("\n");
+                }
+            }
+            dialogModificarArchivo.pack();
+            dialogModificarArchivo.setModal(true);
+            dialogModificarArchivo.setLocationRelativeTo(this);
+            dialogModificarArchivo.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btnModifyArchiveMouseClicked
 
     private void generarJsonFileVendedor(ArrayList vendedores) {
@@ -851,7 +883,8 @@ public class frameMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JScrollPane taListarArchivo;
+    private javax.swing.JScrollPane scrollPane1;
+    private javax.swing.JTextArea taListarArchivo;
     private javax.swing.JTextField tfCantCarrosComprados;
     private javax.swing.JTextField tfCantCarrosVendidos;
     private javax.swing.JTextField tfCantDineroGenerado;
