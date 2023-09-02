@@ -1,6 +1,6 @@
 [
-	Fernando
-	Jesus
-	200000
-	Tesla
+	Fernando,
+	Nuila,
+	3400000,
+	Koenigsegg
 ];

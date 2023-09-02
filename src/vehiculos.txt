@@ -1,8 +1,8 @@
 [
-	Toyota,
-	Azul,
-	Corolla,
+	Koenigsegg,
+	Blanco,
+	Jesko,
 	158,
-	0,
-	200000
+	1,
+	3400000
 ];

@@ -7,11 +7,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import javax.security.auth.callback.ConfirmationCallback;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -602,7 +606,7 @@ public class frameMain extends javax.swing.JFrame {
         tfModeloVehiculo.setText("");
         tfPrecioVehiculo.setText("");
     }//GEN-LAST:event_btnCrearVehiculoMouseClicked
-    int idCarro = 0;
+    int idCarro = 1;
     private void btnHacerVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnHacerVentaMouseClicked
         if (cbVendedor.getSelectedIndex() >= 0 || cbCliente.getSelectedIndex() >= 0 || cbVehiculo.getSelectedIndex() >= 0) {
             Vendedor vendedor = vendedores.get(cbVendedor.getSelectedIndex());
@@ -679,9 +683,46 @@ public class frameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateAdminTreeMouseClicked
 
     private void btnUpdateDiaTreeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateDiaTreeMouseClicked
-        // TODO add your handling code here:
+        // Obtén el modelo de árbol actual
+    DefaultTreeModel treeModel = (DefaultTreeModel) treeDia.getModel();
+
+    // Obtén la raíz del árbol
+    DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) treeModel.getRoot();
+
+    // Encuentra el nodo "Archivo Dia"
+    DefaultMutableTreeNode archivoDiaNode = null;
+    Enumeration<TreeNode> nodes = raiz.breadthFirstEnumeration();
+    while (nodes.hasMoreElements()) {
+        DefaultMutableTreeNode currentNode = (DefaultMutableTreeNode) nodes.nextElement();
+        if (currentNode.getUserObject().toString().equals("Archivo Dia")) {
+            archivoDiaNode = currentNode;
+            break;
+        }
+    }
+
+    if (archivoDiaNode != null) {
+        // Crea un nuevo nodo para la venta
+        DefaultMutableTreeNode ventaNode = new DefaultMutableTreeNode("Venta");
+
+        // Agrega los datos de la venta como hijos del nodo "Venta"
+        ventaNode.add(new DefaultMutableTreeNode("nombreVendedor"));
+        ventaNode.add(new DefaultMutableTreeNode("nombreComprador"));
+
+        // Agrega el nodo "Venta" como hijo del nodo "Archivo Dia"
+        archivoDiaNode.add(ventaNode);
+
+        // Notifica al modelo de árbol que se ha realizado un cambio
+        treeModel.nodeStructureChanged(raiz);
+
+        // Actualiza la vista del árbol
+        treeDia.updateUI();
+    }
     }//GEN-LAST:event_btnUpdateDiaTreeMouseClicked
 
+    public void inicializarIdCarro(){
+        idCarro = vehiculos.size() + 1;
+    }
+    
     private void btnModifyArchiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModifyArchiveMouseClicked
         
         try {
