@@ -28,10 +28,7 @@ public class frameMain extends javax.swing.JFrame {
     public frameMain() {
         initComponents();
         this.setLocationRelativeTo(null);
-        initializeSellerList();
-        initializeClientList();
-        initializeVehicleList();
-        initializeSellList();
+        
     }
 
     /**
